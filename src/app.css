@@ -1,0 +1,15 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-size: 16px;
+    --light: #f5f5f5;
+    --dark-blue: #364F6B;
+    --primary: #3FC1C9;
+    --secondary: #FC5185;
+
+    background: var(--light);
+}

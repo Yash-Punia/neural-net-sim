@@ -1,0 +1,10 @@
+.navbar {
+    font-size: 2rem;
+    font-family: 'Oswald';
+    height: 3.5rem;
+    background: var(--dark-blue);
+    color: white;
+    padding: 0 1rem;
+    display: flex;
+    align-items: center;
+}
