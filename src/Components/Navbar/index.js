@@ -3,8 +3,8 @@ import './style.css';
 
 export default function Navbar() {
     return (
-        <div class="navbar">
-            Neural Network Simulator
+        <div className="navbar">
+            Neural Network Simulator -<span>Multiple Perceptron Network </span>
         </div>
     )
 }

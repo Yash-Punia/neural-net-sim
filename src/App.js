@@ -1,12 +1,14 @@
 import './app.css'
-import { Navbar } from "./Components";
+import { Navbar, PerceptronNetworkBody, Sidebar } from "./Components";
 
 function App() {
-  return (
-    <div className="App">
-      <Navbar/>
-    </div>
-  );
+	return (
+		<div className="app">
+			<Navbar />
+			<Sidebar />
+			<PerceptronNetworkBody />
+		</div>
+	);
 }
 
 export default App;
