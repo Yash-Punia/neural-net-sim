@@ -11,22 +11,21 @@ export default function PerceptronNetworkBody() {
         ctx.stroke();
     }
     
-    const createNodes = (ctx, x1, y1, x2, y2, radius) => {
+    const createNodes = (ctx, x1, y1, name1, x2, y2, name2, radius) => {
         ctx.fillStyle = '#FC5185';
         ctx.beginPath();
+        ctx.font = "16px Arial"
         ctx.arc(x1, y1, radius, 0, 2*Math.PI)
         ctx.arc(x2, y2, radius, 0, 2*Math.PI)
         ctx.fill();
     }
 
-    const createConnections = (ctx, width, height) => {
+    const createNetwork = (ctx, width, height) => {
         let inputNodes = 3;
-        let outputNodes = 5;
+        let outputNodes = 3;
         let layerGap = 500;
-        let nodeGap = 150;
+        let nodeGap = inputNodes > outputNodes ? height / inputNodes : height / outputNodes;
         let radius = 30;
-        // let inputNodesGap = inputNodes%2 === 0 ? (inputNodes-1) * nodeGap/2 : nodeGap;
-        // let outputNodesGap = outputNodes%2 === 0 ? (outputNodes-1) * nodeGap/2 : 2 * nodeGap;
         let inputNodesGap = (inputNodes-1) * nodeGap/2;
         let outputNodesGap = (outputNodes-1) * nodeGap/2;
         for(let i=0;i<inputNodes;i++)
@@ -38,7 +37,7 @@ export default function PerceptronNetworkBody() {
                 let x2 = layerGap/2 + width/2;
                 let y2 = -nodeGap*j + outputNodesGap + height/2;
                 createLine(ctx, x1, y1, x2, y2)
-                createNodes(ctx, x1, y1, x2, y2, radius);
+                createNodes(ctx, x1, y1, 'x' + (i+1), x2, y2, 'y' + (j+1), radius);
             }
         }
     }
@@ -46,7 +45,7 @@ export default function PerceptronNetworkBody() {
     return (
         <div className="body">
             <InputLayer />
-            <Canvas draw={createConnections}/>
+            <Canvas draw={createNetwork}/>
         </div>
     )
 }
