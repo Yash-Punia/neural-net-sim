@@ -1,6 +1,6 @@
-import './app.css'
 import { Navbar, PerceptronNetworkBody, Sidebar } from "./Components";
 import { NeuralNetContextProvider } from './Contexts/context';
+import './app.css'
 
 function App() {
 	return (

@@ -1,5 +1,32 @@
 .sidebar {
     background: #fff;
     display: flex;
+    flex-direction: column;
     grid-area: sidebar;
+    padding: 0 1em;
+}
+
+.sidebar__field {
+    display: flex;
+    justify-content: space-between;
+    margin: 1em 0;
+}
+
+.sidebar__fieldButtons {
+    display: flex;
+}
+
+.sidebar__minusButton, .sidebar__plusButton  {
+    display: grid;
+    place-items: center;
+    margin: 0 1em;
+    cursor: pointer;
+}
+
+.sidebar__plusButton:hover, .sidebar__minusButton:hover {
+    color: var(--primary)
+}
+
+* {
+    /* border: 2px solid red; */
 }
