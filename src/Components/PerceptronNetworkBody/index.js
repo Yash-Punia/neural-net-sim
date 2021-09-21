@@ -1,8 +1,11 @@
-import React from 'react'
+import React, {useContext} from 'react'
+import { NeuralNetContext } from '../../Contexts/context';
 import { Canvas, InputLayer } from '..'
 import './style.css'
 
 export default function PerceptronNetworkBody() {
+    const [inputNodes, ] = useContext(NeuralNetContext).inputNodes;
+    const [outputNodes, ] = useContext(NeuralNetContext).outputNodes;
     
     const createLine = (ctx, x1, y1, x2, y2) => {
         ctx.beginPath();
@@ -21,8 +24,6 @@ export default function PerceptronNetworkBody() {
     }
 
     const createNetwork = (ctx, width, height) => {
-        let inputNodes = 3;
-        let outputNodes = 3;
         let layerGap = 500;
         let nodeGap = inputNodes > outputNodes ? height / inputNodes : height / outputNodes;
         let radius = 30;
