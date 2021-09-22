@@ -9,6 +9,7 @@ export default function Sidebar() {
     const [inputVector, setInputVector] = useContext(NeuralNetContext).inputVector;
     const [outputVector, setOutputVector] = useContext(NeuralNetContext).outputVector;
     const [targetVector, setTargetVector] = useContext(NeuralNetContext).targetVector;
+    const [learningRate, setLearningRate] = useContext(NeuralNetContext).learningRate;
 
 
     const updateInputNodes = nodes => {
@@ -63,21 +64,32 @@ export default function Sidebar() {
                 </div>
             </div>
             <div className="sidebar__field">
+                <h3> Learning Rate </h3>
+                <input className="learningRateInput" type="number" value={learningRate} onChange={e=>setLearningRate(e.target.value)}/>
+            </div>
+            <div className="sidebar__field column">
                 <h3>Input Vector</h3>
                 <InputVector/>
             </div>
-            <div className="sidebar__field">
+            <div className="sidebar__field column">
                 <h3>Target Vector</h3>
                 <TargetVector/>
             </div>
-            <div className="sidebar__field">
+            <div className="sidebar__field column">
                 <h3>Learning Rule</h3>
-            </div>
-            <div className="sidebar__field">
                 <select>
                     <option>Hebbian Learning Rule</option>
                 </select>
             </div>
+            <div className="sidebar__field column">
+                <h3>Activation Function</h3>
+                <select>
+                    <option>Identity</option>
+                    <option>Binary Sigmoid</option>
+                    <option>Bipolar Sigmoid</option>
+                </select>
+            </div>
+
         </div>
     )
 }

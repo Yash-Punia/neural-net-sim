@@ -26,3 +26,23 @@ body {
         "navbar navbar"
         "sidebar body";
 }
+
+input, select {
+    border: none;
+    border-bottom: 2px solid var(--primary);
+    background: var(--light);
+    padding: 0.3em 1em;
+    border-radius: 0.3em;
+    margin: 0.5em 0 ;
+    font-size: 14px;
+    transition: all 0.3s;
+}
+
+option {
+    background: var(--light);
+}
+
+input:focus {
+    outline: none;
+    border-bottom: 2px solid var(--secondary);
+}
