@@ -1,11 +1,13 @@
 import { createContext, useState } from "react";
 
 export const NeuralNetContext = createContext();
+
 export const NeuralNetContextProvider = props => {
-    const [inputVector, setInputVector] = useState([0,0,0]);
-    const [outputVector, setOutputVector] = useState([0,0,0]);
-    const [targetVector, setTargetVector] = useState([0,0,0]);
-    const [learningRate, setLearningRate] = useState(0.03)
+    const [inputVector, setInputVector] = useState([1,1]);
+    const [outputVector, setOutputVector] = useState([1]);
+    const [targetVector, setTargetVector] = useState([1]);
+    const [learningRate, setLearningRate] = useState(1)
+    const [weights, setWeights] = useState(new Array(inputVector.length).fill(0).map(() => new Array(outputVector.length).fill(0)));
 
     return (
         <NeuralNetContext.Provider value={
@@ -13,7 +15,8 @@ export const NeuralNetContextProvider = props => {
                 inputVector: [inputVector, setInputVector], 
                 outputVector: [outputVector, setOutputVector],
                 targetVector: [targetVector, setTargetVector],
-                learningRate: [learningRate, setLearningRate]
+                learningRate: [learningRate, setLearningRate],
+                weights: [weights, setWeights]
             }
         }>
             {props.children}

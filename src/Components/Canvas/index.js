@@ -1,5 +1,6 @@
 import {React, useRef, useEffect} from 'react'
-import './style.css'
+
+
 
 export default function Canvas( { draw } ) {
     

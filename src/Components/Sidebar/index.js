@@ -10,7 +10,7 @@ export default function Sidebar() {
     const [outputVector, setOutputVector] = useContext(NeuralNetContext).outputVector;
     const [targetVector, setTargetVector] = useContext(NeuralNetContext).targetVector;
     const [learningRate, setLearningRate] = useContext(NeuralNetContext).learningRate;
-
+    const [weights, setWeights] = useContext(NeuralNetContext).weights;
 
     const updateInputNodes = nodes => {
         if(nodes === 1)
@@ -23,6 +23,7 @@ export default function Sidebar() {
             let newInputVector = inputVector.filter( (e, i) => i < inputVector.length - 1);
             setInputVector(newInputVector);
         }
+        setWeights(new Array(inputVector.length).fill(0).map(() => new Array(outputVector.length).fill(0)));
     }
 
     const updateOutputNodes = nodes => {
@@ -40,48 +41,49 @@ export default function Sidebar() {
             setOutputVector(newOutputVector);
             setTargetVector(newTargetVector);
         }
+        setWeights(new Array(inputVector.length).fill(0).map(() => new Array(outputVector.length).fill(0)));
     }
 
     return (
-        <div className="sidebar">
-            <div className="sidebar__field">
+        <div className="sidebar bg-white flex flex-col p-2">
+            <div className="flex justify-between m-2">
                 <p>Input Nodes</p>
 
-                <div className="sidebar__fieldButtons">
-                    {inputVector.length > 1 ? <div onClick={() => { updateInputNodes(-1) }} className="sidebar__minusButton"><FaMinus /></div> : <></>}
+                <div className="flex">
+                    {inputVector.length > 1 ? <div onClick={() => { updateInputNodes(-1) }} className="grid place-items-center cursor-pointer m-2"><FaMinus /></div> : <></>}
                     {inputVector.length}
-                    {inputVector.length < 6 ? <div onClick={() => { updateInputNodes(1) }} className="sidebar__plusButton"><FaPlus /></div> : <></>}
+                    {inputVector.length < 6 ? <div onClick={() => { updateInputNodes(1) }} className="grid place-items-center cursor-pointer m-2"><FaPlus /></div> : <></>}
                 </div>
 
             </div>
-            <div className="sidebar__field">
+            <div className="flex justify-between m-2">
                 <p>Output Nodes</p>
 
-                <div className="sidebar__fieldButtons">
-                    {outputVector.length > 1 ? <div onClick={() => { updateOutputNodes(-1) }} className="sidebar__minusButton"><FaMinus /></div> : <></>}
+                <div className="flex">
+                    {outputVector.length > 1 ? <div onClick={() => { updateOutputNodes(-1) }} className="grid place-items-center cursor-pointer m-2"><FaMinus /></div> : <></>}
                     {outputVector.length}
-                    {outputVector.length < 6 ? <div onClick={() => { updateOutputNodes(1) }} className="sidebar__plusButton"><FaPlus /></div> : <></>}
+                    {outputVector.length < 6 ? <div onClick={() => { updateOutputNodes(1) }} className="grid place-items-center cursor-pointer m-2"><FaPlus /></div> : <></>}
                 </div>
             </div>
-            <div className="sidebar__field">
+            <div className="flex justify-between m-2 flex-col">
                 <h3> Learning Rate </h3>
                 <input className="learningRateInput" type="number" value={learningRate} onChange={e=>setLearningRate(e.target.value)}/>
             </div>
-            <div className="sidebar__field column">
+            <div className="flex justify-between m-2 flex-col">
                 <h3>Input Vector</h3>
                 <InputVector/>
             </div>
-            <div className="sidebar__field column">
+            <div className="flex justify-between m-2 flex-col">
                 <h3>Target Vector</h3>
                 <TargetVector/>
             </div>
-            <div className="sidebar__field column">
+            <div className="flex justify-between m-2 flex-col">
                 <h3>Learning Rule</h3>
                 <select>
                     <option>Hebbian Learning Rule</option>
                 </select>
             </div>
-            <div className="sidebar__field column">
+            <div className="flex justify-between m-2 flex-col">
                 <h3>Activation Function</h3>
                 <select>
                     <option>Identity</option>

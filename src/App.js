@@ -1,4 +1,4 @@
-import { Navbar, PerceptronNetworkBody, Sidebar } from "./Components";
+import { Navbar, PerceptronNetworkBody, Sidebar, Panel } from "./Components";
 import { NeuralNetContextProvider } from './Contexts/context';
 import './app.css'
 
@@ -9,6 +9,7 @@ function App() {
 				<Navbar />
 				<Sidebar />
 				<PerceptronNetworkBody />
+				<Panel/>
 			</div>
 		</NeuralNetContextProvider>
 	);

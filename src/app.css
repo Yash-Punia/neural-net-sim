@@ -1,5 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600&family=Source+Sans+Pro:wght@300;400;600;700&display=swap');
-
 * {
     margin: 0;
     padding: 0;
@@ -20,11 +18,11 @@ body {
 .app {
     height: 100vh;
     display: grid;
-    grid-template-columns: 1fr 5fr; 
+    grid-template-columns: 1fr 5fr 1fr; 
     grid-template-rows: 4rem auto;
     grid-template-areas:
-        "navbar navbar"
-        "sidebar body";
+        "navbar navbar navbar"
+        "sidebar body panel";
 }
 
 input, select {

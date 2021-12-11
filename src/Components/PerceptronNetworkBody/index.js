@@ -6,6 +6,7 @@ import './style.css'
 export default function PerceptronNetworkBody() {
     const [inputVector,] = useContext(NeuralNetContext).inputVector;
     const [outputVector,] = useContext(NeuralNetContext).outputVector;
+    const [targetVector, ] = useContext(NeuralNetContext).targetVector;
 
     const createLine = (ctx, x1, y1, x2, y2) => {
         ctx.beginPath();
@@ -26,10 +27,32 @@ export default function PerceptronNetworkBody() {
         ctx.fillText(name2, x2 - 12, y2 - 40);
     }
 
-    const updateInputNodeValues = (ctx, x1, y1, i) => {
+    const createTargetNodes = (ctx, x1, y1, value, radius) => {
+        ctx.fillStyle = '#3FC1C9';
+        ctx.beginPath();
+        ctx.font = "24px Arial"
+        ctx.arc(x1, y1, radius, 0, 2 * Math.PI)
+        ctx.fill();
+        ctx.fillStyle = '#000000';
+        ctx.fillText(value, x1 - 12, y1 - 40);
+    }
+
+    const updateInputTextValues = (ctx, x1, y1, i) => {
         ctx.fillStyle = '#FFFFFF';
         ctx.font = "30px Arial"
         ctx.fillText(inputVector[i], x1 - 8, y1 + 8);
+    }
+
+    const updateOutputTextValues = (ctx, x1, y1, i) => {
+        ctx.fillStyle = '#FFFFFF';
+        ctx.font = "30px Arial"
+        ctx.fillText(outputVector[i], x1 - 8, y1 + 8);
+    }
+
+    const updateTargetTextValues = (ctx, x1, y1, i) => {
+        ctx.fillStyle = '#FFFFFF';
+        ctx.font = "30px Arial"
+        ctx.fillText(targetVector[i], x1 - 8, y1 + 8);
     }
 
     const createNetwork = (ctx, width, height) => {
@@ -38,18 +61,22 @@ export default function PerceptronNetworkBody() {
         let layerGap = 500;
         let nodeGap = inputNodes > outputNodes ? height / inputNodes : height / outputNodes;
         let radius = 30;
-        let inputNodesGap = (inputNodes - 1) * nodeGap / 2;
-        let outputNodesGap = (outputNodes - 1) * nodeGap / 2;
-        let yOffset = 0;
+        let inputNodesGap = (height - (inputNodes - 1) * nodeGap)/2;
+        let outputNodesGap = (height - (outputNodes - 1) * nodeGap)/2;
+        let yOffset = ((inputNodes-1) * nodeGap - (outputNodes-1) * nodeGap)/2;
         let x1 = -layerGap / 2 + width / 2;
         let x2 = layerGap / 2 + width / 2;
+        let x3 = x2 + layerGap / 2;
         for (let i = 0; i < inputNodes; i++) {
             for (let j = 0; j < outputNodes; j++) {
-                let y1 = -nodeGap * i  + inputNodesGap  + height/2;
-                let y2 = -nodeGap  * j + outputNodesGap + height/2;
+                let y1 = nodeGap * i + Math.max(0, -yOffset) +30 + Math.min(inputNodesGap, outputNodesGap);
+                let y2 = nodeGap  * j + Math.max(0, yOffset) + 30 + Math.min(inputNodesGap, outputNodesGap);
                 createLine(ctx, x1, y1, x2, y2)
                 createNodes(ctx, x1, y1, 'X' + (i + 1), x2, y2, 'Y' + (j + 1), radius);
-                updateInputNodeValues(ctx, x1, y1, i);
+                createTargetNodes(ctx, x3, y2, 'T' + (j+1), radius);    
+                updateInputTextValues(ctx, x1, y1, i);
+                updateOutputTextValues(ctx, x2, y2, j);
+                updateTargetTextValues(ctx, x3, y2, j);
             }
         }
     }
