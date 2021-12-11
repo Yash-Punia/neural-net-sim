@@ -1,4 +1,4 @@
-import { React, useContext, useEffect } from 'react'
+import { React, useContext } from 'react'
 import { NeuralNetContext } from '../../Contexts/context'
 
 export default function Panel() {
@@ -8,26 +8,36 @@ export default function Panel() {
     const [learningRate,] = useContext(NeuralNetContext).learningRate;
     const [weights, setWeights] = useContext(NeuralNetContext).weights;
 
-    const nextStep = () => {
+    // const fn = neti => {
+    //     return 1 / (1 + Math.exp(-neti));
+    // }
 
+    // const Fn = neti => {
+    //     return (fn(neti) * (1-fn(neti)));
+    // }
+
+    const nextStep = () => {
+        let activationVector = [];
         // calculate output
         outputVector.forEach((output, i) => {
             let activation = 0;
             inputVector.forEach((input, j) => {
                 activation += input * weights[j][i];
             })
-            if (activation >= 0)
+
+            if(activation >= 0)
                 outputVector[i] = 1;
             else
                 outputVector[i] = -1;
+            // activationVector.push(activation);
         });
-        
+
         setOutputVector([...outputVector]);
 
-        // udpate weights
+        // update weights
         for (let i = 0; i < inputVector.length; i++) {
             for (let j = 0; j < outputVector.length; j++) {
-                weights[i][j] = weights[i][j] + learningRate * (targetVector[j] - outputVector[j]);
+                weights[i][j] = weights[i][j] + learningRate * outputVector[j] * inputVector[i];
             }
         }
         setWeights([...weights]);

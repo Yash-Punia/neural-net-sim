@@ -86,9 +86,9 @@ export default function Sidebar() {
             <div className="flex justify-between m-2 flex-col">
                 <h3>Activation Function</h3>
                 <select>
+                    <option>Bipolar Sigmoid</option>
                     <option>Identity</option>
                     <option>Binary Sigmoid</option>
-                    <option>Bipolar Sigmoid</option>
                 </select>
             </div>
 
